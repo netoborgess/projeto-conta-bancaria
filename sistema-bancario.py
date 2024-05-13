@@ -9,7 +9,7 @@ menu= """
       [4] Sair do Sistema
       
     =========================
-"""
+==>"""
 
 saldo=0
 limite=500
@@ -26,10 +26,10 @@ while True:
 
         limite_saldo = valor > saldo
         limite_maximo = valor > limite
-        limite_saques = valor >= LIMITE_SAQUE
+        limite_saques = numero_saque >= LIMITE_SAQUE
 
         if limite_saldo:
-            print("Operação Falhou! Saldo Insuficiente, Deposite seu Dinheiro")
+            print("Operação Falhou! Valor insuficiente, Deposite seu Dinheiro")
 
         elif limite_maximo:
             print("Operação Falhou! O valor do saque excede o limite.")
@@ -37,12 +37,35 @@ while True:
         elif limite_saques:
             print("Operação Falhou! Limite de Saque já foram exercidas, espero pro proximo dia.")
 
+        elif valor > 0:
+         saldo -= valor
+         extrato += f"Saque: R$ {valor:.2f}\n"
+         numero_saque += 1
+
+        else:
+         ("Operação Falhou! Valor Informado Incorreto")
+
 
     elif opcao == "2":
-        print("Deposito")
+        valor = float(input("Informe o valor do seu deposito:"))
+
+
+        if valor > 0:
+          saldo += valor
+          extrato += f"Deposito: R$ {valor:.2f}\n"
+
+        else:
+           print("Operação Falhou, tente novamente.")
+
+
     
     elif opcao == "3":
-        print("Extrato")
+       print("\n=================EXTRATO NETBANK=================")
+       print("Não foram relizadas nenhuma movimentação" if not extrato else extrato)
+       print(f"\nSaldo: R$ {saldo:.2f}") 
+       print("===================================================")
+
+       
     
     elif opcao == "4":
         break
